@@ -1,0 +1,21 @@
+flowchart LR
+    A["Smartphone + fundus attachment"] --> B["Image capture"]
+    B --> C["Frontend app"]
+    C --> D["Image quality checks"]
+    D --> E["Preprocessing pipeline"]
+    E --> F["FastAPI inference service"]
+    F --> G["PyTorch DR classifier"]
+    G --> H["Severity class + confidence"]
+    G --> I["Grad-CAM heatmap"]
+    H --> J["Result screen"]
+    I --> J
+    J --> K["Referral guidance + disclaimer"]
+
+    subgraph Training["Offline training workflow"]
+        L["APTOS / EyePACS / Messidor"] --> M["Preprocess + augment"]
+        M --> N["Fine-tune EfficientNet/ResNet"]
+        N --> O["Evaluate accuracy, kappa, recall"]
+        O --> P["Export model checkpoint"]
+    end
+
+    P --> F

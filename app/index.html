@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>RetinaCheck DR Screening Prototype</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="shell">
+      <section class="workspace" aria-label="Retinopathy screening workflow">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">RetinaCheck Prototype</p>
+            <h1>Diabetic Retinopathy Screening</h1>
+          </div>
+          <div class="status-pill" id="modelStatus">Demo model UI</div>
+        </header>
+
+        <section class="capture-panel">
+          <div class="capture-copy">
+            <h2>Image Intake</h2>
+            <p>Upload a fundus image to preview preprocessing, image quality checks, severity output, and Grad-CAM style explainability.</p>
+          </div>
+          <label class="upload-button">
+            <input id="imageInput" type="file" accept="image/*">
+            Select Retina Image
+          </label>
+        </section>
+
+        <section class="image-grid">
+          <article class="image-frame">
+            <div class="frame-header">
+              <h2>Original</h2>
+              <span id="originalMeta">No image</span>
+            </div>
+            <canvas id="originalCanvas" width="640" height="420"></canvas>
+          </article>
+
+          <article class="image-frame">
+            <div class="frame-header">
+              <h2>Cleaned Retina</h2>
+              <span id="processedMeta">Waiting</span>
+            </div>
+            <canvas id="processedCanvas" width="640" height="420"></canvas>
+          </article>
+        </section>
+
+        <section class="results-grid">
+          <article class="result-panel">
+            <div class="panel-header">
+              <h2>Prediction</h2>
+              <span id="confidenceLabel">--</span>
+            </div>
+            <div class="severity" id="severityLabel">Upload an image</div>
+            <div class="meter" aria-hidden="true">
+              <div id="confidenceBar"></div>
+            </div>
+            <p class="result-note" id="resultNote">A trained PyTorch model will replace this placeholder result in Phase 2.</p>
+          </article>
+
+          <article class="result-panel">
+            <div class="panel-header">
+              <h2>Image Quality</h2>
+              <span id="qualityScore">--</span>
+            </div>
+            <ul class="quality-list" id="qualityList">
+              <li>Waiting for image analysis.</li>
+            </ul>
+          </article>
+
+          <article class="result-panel heatmap-panel">
+            <div class="panel-header">
+              <h2>Grad-CAM Preview</h2>
+              <span>Explainability</span>
+            </div>
+            <canvas id="heatmapCanvas" width="640" height="320"></canvas>
+          </article>
+        </section>
+
+        <footer>
+          Prototype only. Not for diagnosis, treatment decisions, or clinical use.
+        </footer>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
